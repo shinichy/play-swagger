@@ -9,7 +9,7 @@ import com.typesafe.sbt.web.Import._
 
 object SwaggerPlugin extends AutoPlugin {
   lazy val SwaggerConfig = config("play-swagger").hide
-  lazy val playSwaggerVersion = com.iheart.playSwagger.BuildInfo.version
+  lazy val playSwaggerVersion = shinichy.playSwagger.BuildInfo.version
 
   object autoImport extends SwaggerKeys
 
@@ -24,6 +24,7 @@ object SwaggerPlugin extends AutoPlugin {
   override def projectSettings: Seq[Setting[_]] = Seq(
     ivyConfigurations += SwaggerConfig,
     resolvers += Resolver.jcenterRepo,
+    resolvers += Resolver.bintrayRepo("shinichy", "maven"),
     //todo: remove hardcoded org name using BuildInfo
     libraryDependencies += "com.iheart" %% "play-swagger" % playSwaggerVersion % SwaggerConfig,
     swaggerDomainNameSpaces := Seq(),
